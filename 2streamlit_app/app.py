@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import pickle as pk
 from sklearn.preprocessing import PolynomialFeatures
+import os
 
 st.title("Expenses Prediction")
 
@@ -60,6 +61,7 @@ if st.button("Submit"):
         }
     )
     # st.dataframe(df)
+    path = os.path.join(os.path.dirname(__file__), "bestmodel.pickle")
     dbfile = open("bestmodel.pickle", "rb")
     model = pk.load(dbfile)
     p = PolynomialFeatures(degree=2)
