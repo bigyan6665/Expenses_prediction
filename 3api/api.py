@@ -2,6 +2,7 @@ from fastapi import FastAPI
 import pandas as pd
 import pickle as pk
 from sklearn.preprocessing import PolynomialFeatures
+import os 
 
 app = FastAPI()
 
@@ -58,7 +59,8 @@ def read_item(age: int, sex: str, bmi: float, children: int, smoker: str, region
             "is_smoker": [smoker],
         }
     )
-    dbfile = open("bestmodel.pickle", "rb")
+    path = os.path.join(os.path.dirname(__file__), "bestmodel.pickle")
+    dbfile = open(path, "rb")
     model = pk.load(dbfile)
     p = PolynomialFeatures(degree=2)
     result = model.predict(p.fit_transform(df))[0][0]

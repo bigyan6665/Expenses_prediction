@@ -62,7 +62,7 @@ if st.button("Submit"):
     )
     # st.dataframe(df)
     path = os.path.join(os.path.dirname(__file__), "bestmodel.pickle")
-    dbfile = open("bestmodel.pickle", "rb")
+    dbfile = open(path, "rb")
     model = pk.load(dbfile)
     p = PolynomialFeatures(degree=2)
     result = model.predict(p.fit_transform(df))[0][0]
